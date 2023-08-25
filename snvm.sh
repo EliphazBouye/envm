@@ -15,7 +15,20 @@ ARGUMENT_LIST=(
     "current"
     "version"
 )
+
 ARCH=""
+SNVM_BIN_FOLDER=~/.snvm/nodejs/
+SNVM_ARCHIVE_FOLDER=~/.snvm/archives/
+HISTORY_FILE=.history_version.txt
+
+# TODO do folder creation by a make file | in reflection
+if [[ ! -d $SNVM_BIN_FOLDER ]]; then
+    $(mkdir -p $SNVM_BIN_FOLDER) #Create the snvm nodejs follder
+fi
+
+if [[ ! -d $SNVM_ARCHIVE_FOLDER ]]; then
+    $(mkdir -p $SNVM_ARCHIVE_FOLDER) #Create the snvm nodejs follder
+fi
 
 ############################################################
 # Help                                                     #
@@ -45,6 +58,7 @@ get_arch()
     esac
 }
 
+
 ############################################################
 # LTS                                                      #
 ############################################################
@@ -59,8 +73,17 @@ get_lts()
     echo "Latest LTS version = "
     echo 
     echo $NODEJS_LTS_VERSION
-    NODEJS_LTS_DOWNLOAD=$($CURL -# -L -O "${NODEJS_BASE_URL}${NODEJS_LTS_VERSION}/node-${NODEJS_LTS_VERSION}-${ARCH}.tar.xz")
+    NODEJS_LTS_ARCHIVE="node-${NODEJS_LTS_VERSION}-${ARCH}.tar.xz"
+    # Downdload the latest nodejs version
+    NODEJS_LTS_DOWNLOAD=$(cd $SNVM_ARCHIVE_FOLDER && $CURL -# -L -O "${NODEJS_BASE_URL}${NODEJS_LTS_VERSION}/$NODEJS_LTS_ARCHIVE")
+    dec_archive
     echo $NODEJS_LTS_DOWNLOAD 
+    echo "version=lts" >> $HISTORY_FILE
+}
+
+dec_archive()
+{
+    $(cd $SNVM_ARCHIVE_FOLDER && tar xJf $NODEJS_LTS_ARCHIVE -C $SNVM_BIN_FOLDER)
 }
 
 
