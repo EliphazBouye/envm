@@ -1,1 +1,1 @@
-# Eliphaz Node Version Manager
+# Sophonie Node Version Manager
