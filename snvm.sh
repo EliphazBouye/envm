@@ -17,17 +17,17 @@ ARGUMENT_LIST=(
 )
 
 ARCH=""
-ENVM_BIN_FOLDER=~/.envm/nodejs/
-ENVM_ARCHIVE_FOLDER=~/.envm/archives/
+SNVM_BIN_FOLDER=~/.snvm/nodejs/
+SNVM_ARCHIVE_FOLDER=~/.snvm/archives/
 HISTORY_FILE=.history_version.txt
 
 # TODO do folder creation by a make file | in reflection
-if [[ ! -d $ENVM_BIN_FOLDER ]]; then
-    $(mkdir -p $ENVM_BIN_FOLDER) #Create the envm nodejs follder
+if [[ ! -d $SNVM_BIN_FOLDER ]]; then
+    $(mkdir -p $SNVM_BIN_FOLDER) #Create the snvm nodejs follder
 fi
 
-if [[ ! -d $ENVM_ARCHIVE_FOLDER ]]; then
-    $(mkdir -p $ENVM_ARCHIVE_FOLDER) #Create the envm nodejs follder
+if [[ ! -d $SNVM_ARCHIVE_FOLDER ]]; then
+    $(mkdir -p $SNVM_ARCHIVE_FOLDER) #Create the snvm nodejs follder
 fi
 
 ############################################################
@@ -39,7 +39,7 @@ get_help()
     # Display Help
     echo "Options available."
     echo
-    echo "Syntax: envm [--lts| --current| --help| --version]"
+    echo "Syntax: snvm [--lts| --current| --help| --version]"
     echo "Options: "
     echo "--help         Get help"
     echo "--lts          Get LTS Nodejs version"
@@ -75,7 +75,7 @@ get_lts()
     echo $NODEJS_LTS_VERSION
     NODEJS_LTS_ARCHIVE="node-${NODEJS_LTS_VERSION}-${ARCH}.tar.xz"
     # Downdload the latest nodejs version
-    NODEJS_LTS_DOWNLOAD=$(cd $ENVM_ARCHIVE_FOLDER && $CURL -# -L -O "${NODEJS_BASE_URL}${NODEJS_LTS_VERSION}/$NODEJS_LTS_ARCHIVE")
+    NODEJS_LTS_DOWNLOAD=$(cd $SNVM_ARCHIVE_FOLDER && $CURL -# -L -O "${NODEJS_BASE_URL}${NODEJS_LTS_VERSION}/$NODEJS_LTS_ARCHIVE")
     dec_archive
     echo $NODEJS_LTS_DOWNLOAD 
     echo "version=lts" >> $HISTORY_FILE
@@ -83,7 +83,7 @@ get_lts()
 
 dec_archive()
 {
-    $(cd $ENVM_ARCHIVE_FOLDER && tar xJf $NODEJS_LTS_ARCHIVE -C $ENVM_BIN_FOLDER)
+    $(cd $SNVM_ARCHIVE_FOLDER && tar xJf $NODEJS_LTS_ARCHIVE -C $SNVM_BIN_FOLDER)
 }
 
 
