@@ -1,1 +1,1 @@
-# Sophonie Node Version Manager
+#  Samuel Node Version Manager
