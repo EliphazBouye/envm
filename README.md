@@ -1,1 +1,1 @@
-#  Samuel Node Version Manager
+#  Eliphaz Node Version Manager
