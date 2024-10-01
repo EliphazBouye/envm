@@ -1,1 +1,1 @@
-#  Node Manager
+#  Eliphaz Node Manager
